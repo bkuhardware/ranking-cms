@@ -5,6 +5,7 @@ class Dashboard extends Component {
         return (
             <div>
                 This is dashboard page
+                <button className={'btn btn-primary'}>Hello</button>
             </div>
         );
     }
