@@ -3,10 +3,7 @@ import React, {Component} from 'react';
 class Dashboard extends Component {
     render() {
         return (
-            <div>
-                This is dashboard page
-                <button className={'btn btn-primary'}>Hello</button>
-            </div>
+            <div>This is das</div>
         );
     }
 }

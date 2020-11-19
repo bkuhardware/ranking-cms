@@ -8,7 +8,7 @@ const App = () => {
         <div id="app">
             <Navigator />
             <div className="app-content">
-                <Router />
+                <main><Router /></main>
                 <Footer />
             </div>
         </div>
