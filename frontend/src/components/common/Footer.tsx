@@ -1,8 +1,12 @@
 import React from "react";
 
 const Footer = () => {
+    const dateCopyright: number = new Date().getFullYear();
+    const footerText: string = `${dateCopyright} © bkuhardware`;
     return (
-        <div>Footer</div>
+        <footer className="card-footer text-center text-primary">
+            {footerText}
+        </footer>
     );
 };
 

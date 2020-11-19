@@ -9,8 +9,8 @@ const App = () => {
             <Navigator />
             <div className="app-content">
                 <Router />
+                <Footer />
             </div>
-            <Footer />
         </div>
     )
 };
