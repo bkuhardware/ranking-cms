@@ -4,9 +4,9 @@
     .app-content {
         height: calc(100vh - #{$header-height});
         overflow-y: auto;
-        main {
+        .main-layout {
             min-height: calc(100% - #{$footer-height});
-            padding: 40px;
+            padding: 40px 10px;
         }
     }
 }
