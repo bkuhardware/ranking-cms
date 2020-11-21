@@ -3,29 +3,37 @@ import FieldItem from "../common/FieldItem";
 import {Input} from "reactstrap/es";
 import PropTypes from 'prop-types';
 import {Builder} from "builder-pattern";
+import CreateBoardInfoFormModel from "../../models/tournaments/createBoardInfoFormModel";
 
-class CreateBoardInfoForm extends React.Component {
+interface CreateBoardInfoFormProps {
+    value: CreateBoardInfoFormModel,
+    onChange: (value: CreateBoardInfoFormModel) => void
+}
+
+class CreateBoardInfoForm extends React.Component<CreateBoardInfoFormProps> {
+    static propTypes = {
+        value: PropTypes.instanceOf(CreateBoardInfoFormModel).isRequired,
+        onChange: PropTypes.func.isRequired
+    }
 
     handleInputTournamentName = (event: FormEvent<HTMLInputElement>) => {
-        const newName: string = event.target.value;
-        this.props.onChange(Builder(this.props.value).name(newName).build());
+        const newName: string = (event.target as HTMLInputElement).value;
+        this.props.onChange(Builder<CreateBoardInfoFormModel>(this.props.value).name(newName).build());
     }
 
     handleInputTournamentDescription = (event: FormEvent<HTMLInputElement>) => {
-        const newDescription: string = event.target.value;
-        this.props.onChange(Builder(this.props.value).description(newDescription).build());
+        const newDescription: string = (event.target as HTMLInputElement).value;
+        this.props.onChange(Builder<CreateBoardInfoFormModel>(this.props.value).description(newDescription).build());
     }
 
     render() {
-        const name: string = this.props.name;
-        const description: string = this.props.description;
         return (
             <div className="w-85">
                 <FieldItem label="Name">
                     <Input
                         type="text"
                         placeholder="Enter tournament name"
-                        value={name}
+                        value={this.props.value.name}
                         onInput={this.handleInputTournamentName}
                     />
                 </FieldItem>
@@ -34,18 +42,13 @@ class CreateBoardInfoForm extends React.Component {
                         type="textarea"
                         placeholder="Enter tournament description"
                         className="h-fix-60"
-                        value={description}
+                        value={this.props.value.description}
                         onInput={this.handleInputTournamentDescription}
                     />
                 </FieldItem>
             </div>
         )
     }
-}
-
-CreateBoardInfoForm.propTypes = {
-    value: PropTypes.instanceOf(Object).isRequired,              //TODO: Change to correct instance.
-    onChange: PropTypes.func.isRequired
 }
 
 export default CreateBoardInfoForm;
