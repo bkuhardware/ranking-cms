@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import TournamentModel from "../../models/tournamentModel";
-import DashboardTournament from "./DashboardTournament";
+import TournamentModel from "../../models/tournaments/tournamentModel";
+import DashboardTournamentItem from "./DashboardTournamentItem";
 import {BsChevronDoubleDown} from "react-icons/bs";
 import {Builder} from "builder-pattern";
 import { Button, Col, Row, Spinner } from 'reactstrap';
@@ -24,7 +24,7 @@ class DashboardTournaments extends Component {
                 <Row>
                     {tournaments.map((tournament: TournamentModel) => (
                         <Col sm="3" key={tournament.id}>
-                            <DashboardTournament tournament={tournament} />
+                            <DashboardTournamentItem tournament={tournament} />
                         </Col>
                     ))}
                 </Row>

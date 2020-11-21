@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, CardText, CardTitle, Col } from 'reactstrap';
-import TournamentModel from "../../models/tournamentModel";
+import { Card, CardText, CardTitle } from 'reactstrap';
+import TournamentModel from "../../models/tournaments/tournamentModel";
 import {formatDate} from "../../helpers/dateHelper";
 
-function DashboardTournament(props: any) {
+function DashboardTournamentItem(props: any) {
     const tournament: TournamentModel = props.tournament;
     const lastUpdatedStr: string = formatDate(tournament.lastUpdated);
     return (
@@ -19,4 +19,4 @@ function DashboardTournament(props: any) {
     )
 }
 
-export default DashboardTournament;
+export default DashboardTournamentItem;
