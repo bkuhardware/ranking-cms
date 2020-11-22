@@ -4,6 +4,8 @@ import {Input, Label} from "reactstrap/es";
 import PropTypes from 'prop-types';
 import {Builder} from "builder-pattern";
 import CreateBoardInfoFormModel from "../../models/tournaments/createBoardInfoFormModel";
+import {MAX_TOURNAMENT_DESCRIPTION_LENGTH, MAX_TOURNAMENT_NAME_LENGTH} from "../../common/constants/tournament";
+import {getAcronymText} from "../../helpers/textHelper";
 
 interface CreateBoardInfoFormProps {
     value: CreateBoardInfoFormModel,
@@ -18,17 +20,28 @@ class CreateBoardInfoForm extends React.Component<CreateBoardInfoFormProps> {
 
     handleInputTournamentName = (event: FormEvent<HTMLInputElement>) => {
         const newName: string = (event.target as HTMLInputElement).value;
-        this.props.onChange(Builder<CreateBoardInfoFormModel>(this.props.value).name(newName).build());
+        if (newName.length <= MAX_TOURNAMENT_NAME_LENGTH) {
+            const newAcronym: string = getAcronymText(newName);
+            const newValue: CreateBoardInfoFormModel = Builder<CreateBoardInfoFormModel>(this.props.value).name(newName).acronymName(newAcronym).build();
+            this.props.onChange(newValue);
+        }
     }
 
     handleInputTournamentDescription = (event: FormEvent<HTMLInputElement>) => {
         const newDescription: string = (event.target as HTMLInputElement).value;
-        this.props.onChange(Builder<CreateBoardInfoFormModel>(this.props.value).description(newDescription).build());
+        if (newDescription.length <= MAX_TOURNAMENT_DESCRIPTION_LENGTH) {
+            this.props.onChange(Builder<CreateBoardInfoFormModel>(this.props.value).description(newDescription).build());
+        }
     }
 
     handleChangeHasTwoRounds = (event: FormEvent<HTMLInputElement>) => {
         const newValue: boolean = (event.target as HTMLInputElement).checked;
         this.props.onChange(Builder<CreateBoardInfoFormModel>(this.props.value).isTwoRounds(newValue).build());
+    }
+
+    handleInputTournamentAcronymName = (event: FormEvent<HTMLInputElement>) => {
+        const newValue: string = (event.target as HTMLInputElement).value;
+        this.props.onChange(Builder<CreateBoardInfoFormModel>(this.props.value).acronymName(newValue).build());
     }
 
     render() {
@@ -40,6 +53,14 @@ class CreateBoardInfoForm extends React.Component<CreateBoardInfoFormProps> {
                         placeholder="Enter tournament name"
                         value={this.props.value.name}
                         onInput={this.handleInputTournamentName}
+                    />
+                </FieldItem>
+                <FieldItem label="Acronym Name">
+                    <Input
+                        type="text"
+                        className="w-fix-80"
+                        value={this.props.value.acronymName}
+                        onInput={this.handleInputTournamentAcronymName}
                     />
                 </FieldItem>
                 <FieldItem label="Description">

@@ -31,14 +31,14 @@ class CreateNationLeagueBoard extends Component {
     }
 
     isSubmitButtonDisabled = (): boolean => {
-        return !this.state.teams || !this.state.info.description || !this.state.info.name;
+        return !this.state.teams || !this.state.info.description || !this.state.info.name || !this.state.info.acronymName;
     }
 
     render() {
         return (
             <div>
                 <CreateBoardPageHeader
-                    title="Create nation league"
+                    title="Create nation league tournament"
                     onCancel={this.handleCancelCreate}
                     onSubmit={this.handleSubmit}
                     submitDisabled={this.isSubmitButtonDisabled()}
