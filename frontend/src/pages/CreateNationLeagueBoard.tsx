@@ -1,17 +1,24 @@
 import React, {Component} from 'react';
-import CreateNationLeagueBoardDetail from "../components/create-nation-league-board/CreateNationLeagueBoardDetail";
 import CreateBoardPageHeader from "../components/common/CreateBoardPageHeader";
-import CreateBoardInfoForm from "../components/create-nation-league-board/CreateBoardInfoForm";
+import CreateBoardInfoForm from "../components/common/CreateBoardInfoForm";
 import CreateBoardInfoFormModel from "../models/tournaments/createBoardInfoFormModel";
+import CreateBoardTeamsAdd from "../components/common/CreateBoardTeamsAdd";
 
 class CreateNationLeagueBoard extends Component {
     state = {
-        info: new CreateBoardInfoFormModel()
+        info: new CreateBoardInfoFormModel(),
+        teams: ''
     }
 
     handleChangeInfo = (newInfo: CreateBoardInfoFormModel) => {
         this.setState({
             info: newInfo
+        });
+    }
+
+    handleChangeTeams = (teams: string) => {
+        this.setState({
+            teams
         });
     }
 
@@ -23,6 +30,10 @@ class CreateNationLeagueBoard extends Component {
 
     }
 
+    isSubmitButtonDisabled = (): boolean => {
+        return !this.state.teams || !this.state.info.description || !this.state.info.name;
+    }
+
     render() {
         return (
             <div>
@@ -30,12 +41,14 @@ class CreateNationLeagueBoard extends Component {
                     title="Create nation league"
                     onCancel={this.handleCancelCreate}
                     onSubmit={this.handleSubmit}
+                    submitDisabled={this.isSubmitButtonDisabled()}
                 />
                 <CreateBoardInfoForm
                     value={this.state.info}
                     onChange={this.handleChangeInfo}
                 />
-                <CreateNationLeagueBoardDetail />
+                <br />
+                <CreateBoardTeamsAdd value={this.state.teams} onChange={this.handleChangeTeams} />
             </div>
         );
     }
