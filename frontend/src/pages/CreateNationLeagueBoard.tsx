@@ -6,8 +6,13 @@ import CreateBoardTeamsAdd from "../components/common/CreateBoardTeamsAdd";
 import CreateNationLeagueBoardPreviewModal
     from "../components/create-nation-league/CreateNationLeagueBoardPreviewModal";
 import {checkTeamsText, checkTournamentInfo, randomSortTeams} from "../helpers/createBoardHelper";
+import {RouteComponentProps, withRouter} from "react-router";
+import ROUTE_PATH from "../common/constants/routeConstants";
 
-class CreateNationLeagueBoard extends Component {
+interface CreateNationLeagueBoardProps extends RouteComponentProps {
+
+}
+class CreateNationLeagueBoard extends Component<CreateNationLeagueBoardProps> {
     state = {
         info: new CreateBoardInfoFormModel(),
         teamsText: '',
@@ -36,7 +41,7 @@ class CreateNationLeagueBoard extends Component {
     }
 
     handleCancelCreate = () => {
-
+        this.props.history.push(ROUTE_PATH.DASHBOARD);
     }
 
     handlePreview = () => {
@@ -82,4 +87,4 @@ class CreateNationLeagueBoard extends Component {
     }
 }
 
-export default CreateNationLeagueBoard;
+export default withRouter(CreateNationLeagueBoard);
