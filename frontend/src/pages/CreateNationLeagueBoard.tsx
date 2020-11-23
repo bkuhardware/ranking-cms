@@ -8,6 +8,7 @@ import CreateNationLeagueBoardPreviewModal
 import {checkTeamsText, checkTournamentInfo, randomSortTeams} from "../helpers/createBoardHelper";
 import {RouteComponentProps, withRouter} from "react-router";
 import ROUTE_PATH from "../common/constants/routeConstants";
+import {MAX_TEAM_IN_ONE_NATION_LEAGUE_TOURNAMENT} from "../common/constants/nationLeague";
 
 interface CreateNationLeagueBoardProps extends RouteComponentProps {
 
@@ -75,7 +76,7 @@ class CreateNationLeagueBoard extends Component<CreateNationLeagueBoardProps> {
                     onChange={this.handleChangeInfo}
                 />
                 <br />
-                <CreateBoardTeamsAdd value={this.state.teamsText} onChange={this.handleChangeTeamsText} />
+                <CreateBoardTeamsAdd value={this.state.teamsText} onChange={this.handleChangeTeamsText} maxTeams={MAX_TEAM_IN_ONE_NATION_LEAGUE_TOURNAMENT} />
                 <CreateNationLeagueBoardPreviewModal
                     visible={this.state.isPreviewModalVisible}
                     onClose={this.handleClosePreviewModal}

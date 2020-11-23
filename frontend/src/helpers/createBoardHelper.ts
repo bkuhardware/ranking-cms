@@ -1,6 +1,7 @@
 import {randomCompare} from "./utilHelper";
-import {MAX_TEAM_IN_ONE_TOURNAMENT, TEAM_SEPARATOR_CHARACTER} from "../common/constants/tournament";
+import {TEAM_SEPARATOR_CHARACTER} from "../common/constants/tournament";
 import CreateBoardInfoFormModel from "../models/tournaments/createBoardInfoFormModel";
+import {MAX_TEAM_IN_ONE_NATION_LEAGUE_TOURNAMENT} from "../common/constants/nationLeague";
 
 export const randomSortTeams = (teamsText: string): string[] => {
     const teams: string[] = teamsText.split(TEAM_SEPARATOR_CHARACTER);
@@ -16,7 +17,7 @@ export const checkTeamsText = (teamsText: string): boolean => {
     const isEmptyTeams: boolean = teamsText === '';
     const teams: string[] = teamsText.split(TEAM_SEPARATOR_CHARACTER)
     const isEvenNumberOfTeams: boolean = teams.length % 2 === 0;
-    const isNumberOfTeamsNotExceed: boolean = teams.length <= MAX_TEAM_IN_ONE_TOURNAMENT;
+    const isNumberOfTeamsNotExceed: boolean = teams.length <= MAX_TEAM_IN_ONE_NATION_LEAGUE_TOURNAMENT;
     const hasEmptyTeam: boolean = teams.some((team: string) => team === '');
     const isDuplicateTeam: boolean = checkDuplicateTeam(teams);
     return !hasEmptyTeam
