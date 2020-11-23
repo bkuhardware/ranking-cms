@@ -5,26 +5,23 @@ import PropTypes from 'prop-types';
 interface CreateBoardPageHeaderProps {
     title: string;
     onCancel: () => void;
-    onSubmit: () => void;
-    submitDisabled?: boolean;
+    onPreview: () => void;
+    previewDisabled?: boolean;
     cancelDisabled?: boolean;
 }
 
 function CreateBoardPageHeader(props: CreateBoardPageHeaderProps) {
-    const title: string = props.title;
-    const handleCancel = props.onCancel;
-    const handleSubmit = props.onSubmit;
-    const submitDisabled: boolean = props.submitDisabled || false;
+    const previewDisabled: boolean = props.previewDisabled || false;
     const cancelDisabled: boolean = props.cancelDisabled || false;
     return (
         <h3 className="page-title">
-            {title}
+            {props.title}
             <div className="float-right">
-                <Button className="mr-2" onClick={handleCancel} disabled={cancelDisabled}>
+                <Button className="mr-2" onClick={props.onCancel} disabled={cancelDisabled}>
                     Cancel
                 </Button>
-                <Button color="success" onClick={handleSubmit} disabled={submitDisabled}>
-                    Submit
+                <Button color="success" onClick={props.onPreview} disabled={previewDisabled}>
+                    Preview
                 </Button>
             </div>
         </h3>
@@ -34,8 +31,8 @@ function CreateBoardPageHeader(props: CreateBoardPageHeaderProps) {
 CreateBoardPageHeader.propTypes = {
     title: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    submitDisabled: PropTypes.bool,
+    onPreview: PropTypes.func.isRequired,
+    previewDisabled: PropTypes.bool,
     cancelDisabled: PropTypes.bool
 }
 

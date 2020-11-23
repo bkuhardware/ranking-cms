@@ -3,11 +3,17 @@ import CreateBoardPageHeader from "../components/common/CreateBoardPageHeader";
 import CreateBoardInfoForm from "../components/common/CreateBoardInfoForm";
 import CreateBoardInfoFormModel from "../models/tournaments/createBoardInfoFormModel";
 import CreateBoardTeamsAdd from "../components/common/CreateBoardTeamsAdd";
+import CreateNationLeagueBoardPreviewModal
+    from "../components/create-nation-league/CreateNationLeagueBoardPreviewModal";
+import {checkTeamsText, checkTournamentInfo, randomSortTeams} from "../helpers/createBoardHelper";
 
 class CreateNationLeagueBoard extends Component {
     state = {
         info: new CreateBoardInfoFormModel(),
-        teams: ''
+        teamsText: '',
+        randomSortedTeams: [],
+        isPreviewModalVisible: false,
+        isChangeTeamsAfterPreview: false
     }
 
     handleChangeInfo = (newInfo: CreateBoardInfoFormModel) => {
@@ -16,22 +22,38 @@ class CreateNationLeagueBoard extends Component {
         });
     }
 
-    handleChangeTeams = (teams: string) => {
+    handleChangeTeamsText = (teamsText: string) => {
         this.setState({
-            teams
+            teamsText: teamsText,
+            isChangeTeamsAfterPreview: true
         });
     }
 
-    handleCancelCreate() {
+    handleClosePreviewModal = () => {
+        this.setState({
+            isPreviewModalVisible: false
+        });
+    }
+
+    handleCancelCreate = () => {
 
     }
 
-    handleSubmit() {
-
+    handlePreview = () => {
+        if (this.state.isChangeTeamsAfterPreview) {
+            const randomSortedTeams: string[] = randomSortTeams(this.state.teamsText);
+            this.setState({
+                randomSortedTeams
+            });
+        }
+        this.setState({
+            isPreviewModalVisible: true,
+            isChangeTeamsAfterPreview: false
+        });
     }
 
-    isSubmitButtonDisabled = (): boolean => {
-        return !this.state.teams || !this.state.info.description || !this.state.info.name || !this.state.info.acronymName;
+    isPreviewButtonDisabled = (): boolean => {
+        return !checkTournamentInfo(this.state.info) || !checkTeamsText(this.state.teamsText);          //TODO: Use selector and store.
     }
 
     render() {
@@ -40,15 +62,21 @@ class CreateNationLeagueBoard extends Component {
                 <CreateBoardPageHeader
                     title="Create nation league tournament"
                     onCancel={this.handleCancelCreate}
-                    onSubmit={this.handleSubmit}
-                    submitDisabled={this.isSubmitButtonDisabled()}
+                    onPreview={this.handlePreview}
+                    previewDisabled={this.isPreviewButtonDisabled()}
                 />
                 <CreateBoardInfoForm
                     value={this.state.info}
                     onChange={this.handleChangeInfo}
                 />
                 <br />
-                <CreateBoardTeamsAdd value={this.state.teams} onChange={this.handleChangeTeams} />
+                <CreateBoardTeamsAdd value={this.state.teamsText} onChange={this.handleChangeTeamsText} />
+                <CreateNationLeagueBoardPreviewModal
+                    visible={this.state.isPreviewModalVisible}
+                    onClose={this.handleClosePreviewModal}
+                    randomSortedTeams={this.state.randomSortedTeams}            //TODO: Use data from store, not props.
+                    hasTwoTurns={this.state.info.isTwoTurns}
+                />
             </div>
         );
     }

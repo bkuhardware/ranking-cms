@@ -1,6 +1,6 @@
 import React, {FormEvent} from "react";
 import FieldItem from "./FieldItem";
-import {Input, Label} from "reactstrap/es";
+import {Input} from "reactstrap/es";
 import PropTypes from 'prop-types';
 import {Builder} from "builder-pattern";
 import CreateBoardInfoFormModel from "../../models/tournaments/createBoardInfoFormModel";
@@ -34,9 +34,9 @@ class CreateBoardInfoForm extends React.Component<CreateBoardInfoFormProps> {
         }
     }
 
-    handleChangeHasTwoRounds = (event: FormEvent<HTMLInputElement>) => {
+    handleChangeHasTwoTurns = (event: FormEvent<HTMLInputElement>) => {
         const newValue: boolean = (event.target as HTMLInputElement).checked;
-        this.props.onChange(Builder<CreateBoardInfoFormModel>(this.props.value).isTwoRounds(newValue).build());
+        this.props.onChange(Builder<CreateBoardInfoFormModel>(this.props.value).isTwoTurns(newValue).build());
     }
 
     handleInputTournamentAcronymName = (event: FormEvent<HTMLInputElement>) => {
@@ -72,8 +72,8 @@ class CreateBoardInfoForm extends React.Component<CreateBoardInfoFormProps> {
                         onInput={this.handleInputTournamentDescription}
                     />
                 </FieldItem>
-                <FieldItem label="2 rounds?">
-                    <Input type="checkbox" checked={this.props.value.isTwoRounds} onChange={this.handleChangeHasTwoRounds} className="ml-0" />
+                <FieldItem label="2 turns?">
+                    <Input type="checkbox" checked={this.props.value.isTwoTurns} onChange={this.handleChangeHasTwoTurns} className="ml-0 position-static" />
                 </FieldItem>
             </div>
         )
