@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CreateBoardPageHeader from "../components/common/CreateBoardPageHeader";
 import CreateBoardInfoForm from "../components/common/CreateBoardInfoForm";
-import CreateBoardInfoFormModel from "../models/tournaments/createBoardInfoFormModel";
+import CreateBoardInfoFormModel from "../models/create-tournament/createBoardInfoFormModel";
 import CreateBoardTeamsAdd from "../components/common/CreateBoardTeamsAdd";
 import CreateNationLeagueBoardPreviewModal
     from "../components/create-nation-league/CreateNationLeagueBoardPreviewModal";
@@ -78,6 +78,7 @@ class CreateNationLeagueBoard extends Component<CreateNationLeagueBoardProps> {
                 <br />
                 <CreateBoardTeamsAdd value={this.state.teamsText} onChange={this.handleChangeTeamsText} maxTeams={MAX_TEAM_IN_ONE_NATION_LEAGUE_TOURNAMENT} />
                 <CreateNationLeagueBoardPreviewModal
+                    info={this.state.info}
                     visible={this.state.isPreviewModalVisible}
                     onClose={this.handleClosePreviewModal}
                     randomSortedTeams={this.state.randomSortedTeams}            //TODO: Use data from store, not props.

@@ -1,6 +1,6 @@
 import {randomCompare} from "./utilHelper";
 import {TEAM_SEPARATOR_CHARACTER} from "../common/constants/tournament";
-import CreateBoardInfoFormModel from "../models/tournaments/createBoardInfoFormModel";
+import CreateBoardInfoFormModel from "../models/create-tournament/createBoardInfoFormModel";
 import {MAX_TEAM_IN_ONE_NATION_LEAGUE_TOURNAMENT} from "../common/constants/nationLeague";
 
 export const randomSortTeams = (teamsText: string): string[] => {

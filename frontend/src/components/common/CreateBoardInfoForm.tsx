@@ -3,7 +3,7 @@ import FieldItem from "./FieldItem";
 import {Input} from "reactstrap/es";
 import PropTypes from 'prop-types';
 import {Builder} from "builder-pattern";
-import CreateBoardInfoFormModel from "../../models/tournaments/createBoardInfoFormModel";
+import CreateBoardInfoFormModel from "../../models/create-tournament/createBoardInfoFormModel";
 import {MAX_TOURNAMENT_DESCRIPTION_LENGTH, MAX_TOURNAMENT_NAME_LENGTH} from "../../common/constants/tournament";
 import {getAcronymText} from "../../helpers/textHelper";
 

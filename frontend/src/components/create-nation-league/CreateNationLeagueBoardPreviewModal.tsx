@@ -1,15 +1,17 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap/es";
 import {BsArrowCounterclockwise, BsCheck} from "react-icons/all";
-import MatchScheduleModel from "../../models/tournaments/MatchScheduleModel";
+import RoundRobinMatchesScheduleModel from "../../models/common/roundRobinMatchesScheduleModel";
 import {createMatchSchedule} from "../../helpers/scheduleHelper";
+import MatchSchedule from "../common/MatchSchedule";
+import CreateBoardInfoFormModel from "../../models/create-tournament/createBoardInfoFormModel";
 
 interface CreateNationLeagueBoardPreviewModalProps {
     visible: boolean;
     onClose: () => void;
     randomSortedTeams: string[];                //TODO: Use data from store, not props.
-    hasTwoTurns: boolean
+    hasTwoTurns: boolean;
+    info: CreateBoardInfoFormModel
 }
 
 function CreateNationLeagueBoardPreviewModal(props: CreateNationLeagueBoardPreviewModalProps) {
@@ -20,12 +22,14 @@ function CreateNationLeagueBoardPreviewModal(props: CreateNationLeagueBoardPrevi
     const handleSubmit = () => {
 
     };
-    const scheduleData: MatchScheduleModel = createMatchSchedule(props.randomSortedTeams, props.hasTwoTurns);
+    const scheduleData: RoundRobinMatchesScheduleModel = createMatchSchedule(props.randomSortedTeams, hasTwoTurns);
     return (
-        <Modal isOpen={props.visible} toggle={props.onClose} fade={false}>
+        <Modal isOpen={props.visible} toggle={props.onClose} fade={false} modalClassName="create-nation-league-board-preview-modal">
             <ModalHeader toggle={props.onClose}>Preview result</ModalHeader>
             <ModalBody>
-                {JSON.stringify(scheduleData)}
+                <h3 className="text-center">{`${props.info.name} (${props.info.acronymName})`}</h3>
+                <div className="mb-3">{props.info.description}</div>
+                <MatchSchedule matchSchedule={scheduleData} />
             </ModalBody>
             <ModalFooter>
                 <Button color="info" onClick={handleChangeResult}>
@@ -37,13 +41,6 @@ function CreateNationLeagueBoardPreviewModal(props: CreateNationLeagueBoardPrevi
             </ModalFooter>
         </Modal>
     )
-}
-
-CreateNationLeagueBoardPreviewModal.propTypes = {
-    visible: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    randomSortedTeams: PropTypes.arrayOf(PropTypes.string).isRequired,
-    hasTwoTurns: PropTypes.bool
 }
 
 export default CreateNationLeagueBoardPreviewModal;
