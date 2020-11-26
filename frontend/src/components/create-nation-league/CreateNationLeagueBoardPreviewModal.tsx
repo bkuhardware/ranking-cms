@@ -11,13 +11,14 @@ interface CreateNationLeagueBoardPreviewModalProps {
     onClose: () => void;
     randomSortedTeams: string[];                //TODO: Use data from store, not props.
     hasTwoTurns: boolean;
-    info: CreateBoardInfoFormModel
+    info: CreateBoardInfoFormModel;
+    onSortRandom: () => void;
 }
 
 function CreateNationLeagueBoardPreviewModal(props: CreateNationLeagueBoardPreviewModalProps) {
     const hasTwoTurns: boolean = props.hasTwoTurns || false;
     const handleChangeResult = () => {
-
+        props.onSortRandom();
     };
     const handleSubmit = () => {
 
@@ -27,8 +28,8 @@ function CreateNationLeagueBoardPreviewModal(props: CreateNationLeagueBoardPrevi
         <Modal isOpen={props.visible} toggle={props.onClose} fade={false} modalClassName="create-nation-league-board-preview-modal">
             <ModalHeader toggle={props.onClose}>Preview result</ModalHeader>
             <ModalBody>
-                <h3 className="text-center">{`${props.info.name} (${props.info.acronymName})`}</h3>
-                <div className="mb-3">{props.info.description}</div>
+                <h3 className="text-center text-uppercase">{`${props.info.name} (${props.info.acronymName})`}</h3>
+                <h4 className="mb-3">{props.info.description}</h4>
                 <MatchSchedule matchSchedule={scheduleData} />
             </ModalBody>
             <ModalFooter>

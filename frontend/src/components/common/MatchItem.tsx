@@ -7,10 +7,10 @@ interface MatchItemProps {
 
 const MatchItem: React.FunctionComponent<MatchItemProps> = (props: MatchItemProps) => {
     return (
-        <div className="d-flex pt-2 pb-2">
-            <div className="flex-grow-1">{props.match.first}</div>
+        <div className="text-center d-flex pt-2 pb-2">
+            <div className="w-45">{props.match.first}</div>
             <span className="w-10">-</span>
-            <div className="flex-grow-1">{props.match.second}</div>
+            <div className="w-45">{props.match.second}</div>
         </div>
     )
 }

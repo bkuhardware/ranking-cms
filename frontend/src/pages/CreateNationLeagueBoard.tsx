@@ -47,10 +47,7 @@ class CreateNationLeagueBoard extends Component<CreateNationLeagueBoardProps> {
 
     handlePreview = () => {
         if (this.state.isChangeTeamsAfterPreview) {
-            const randomSortedTeams: string[] = randomSortTeams(this.state.teamsText);
-            this.setState({
-                randomSortedTeams
-            });
+            this.handleSortRandom();
         }
         this.setState({
             isPreviewModalVisible: true,
@@ -58,6 +55,12 @@ class CreateNationLeagueBoard extends Component<CreateNationLeagueBoardProps> {
         });
     }
 
+    handleSortRandom = () => {
+        const randomSortedTeams: string[] = randomSortTeams(this.state.teamsText);
+        this.setState({
+            randomSortedTeams
+        });
+    }
     isPreviewButtonDisabled = (): boolean => {
         return !checkTournamentInfo(this.state.info) || !checkTeamsText(this.state.teamsText);          //TODO: Use selector and store.
     }
@@ -83,6 +86,7 @@ class CreateNationLeagueBoard extends Component<CreateNationLeagueBoardProps> {
                     onClose={this.handleClosePreviewModal}
                     randomSortedTeams={this.state.randomSortedTeams}            //TODO: Use data from store, not props.
                     hasTwoTurns={this.state.info.isTwoTurns}
+                    onSortRandom={this.handleSortRandom}
                 />
             </div>
         );

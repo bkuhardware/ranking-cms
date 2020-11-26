@@ -11,7 +11,7 @@ const RoundMatches: React.FunctionComponent<RoundMatchesProps> = (props: RoundMa
     return (
         <div className="mb-2">
             <div className="mb-2 text-info">{props.title}</div>
-            <div className="text-center rounded bg-success-10">
+            <div className="text-center rounded bg-dark text-white">
                 {props.roundMatches.map((match: PairModel, index: number) => (
                     <MatchItem match={match} key={index} />
                 ))}
